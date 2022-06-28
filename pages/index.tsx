@@ -67,7 +67,7 @@ const Home = ({
     >
       <Card
         title="Laundry day assignments"
-        description="You get priority to do laundry at your assigned date! Assignments are updated every Monday at 12 AM."
+        description="You get priority to do laundry on your assigned date! Assignments are updated every Monday at 12 AM."
       >
         <div className="flex flex-col sm:flex-row justify-center items-center gap-4 md:gap-12">
           <div className="flex-1/2 w-full">
