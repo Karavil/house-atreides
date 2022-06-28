@@ -1,8 +1,10 @@
 import type { NextPage } from 'next'
 import { DayToUserAssignment } from "../components/DayToUserAssignment";
 import { DayToUserAssignmentTable } from "../components/DayToUserAssignmentTable";
+import { Card } from "../components/ui/Card";
 import { getDateForNYC, snapToSunday } from "../util/calendar";
 import { generateWeeklySeed, randomWithSeed } from "../util/random";
+import { cN } from "../util/style";
 
 const USERS = ["Alp", "Erik", "Adam", "Grace", "Shelby"];
 
@@ -55,20 +57,29 @@ const Home = ({
   dayToUserNextWeek: Partial<Record<Day, User>>;
 }) => {
   return (
-    <div className="w-full min-h-[100vh] flex flex-col items-center justify-center gap-8 py-4">
-      <div className="max-w-2xl flex w-full flex-col sm:flex-row justify-center items-center gap-4 md:gap-12 px-8">
-        <div className="flex-1/2 w-full">
-          <h1 className="font-bold">This week</h1>
-          <DayToUserAssignmentTable dayToUserMap={dayToUserThisWeek} />
+    <div
+      className={cN(
+        "w-full min-h-[100vh]",
+        "bg-slate-100",
+        "flex flex-col items-center justify-center gap-8",
+        "p-4"
+      )}
+    >
+      <Card
+        title="Laundry day assignments"
+        description="You get priority to do laundry at your assigned date! Assignments are updated every Monday at 12 AM."
+      >
+        <div className="flex flex-col sm:flex-row justify-center items-center gap-4 md:gap-12">
+          <div className="flex-1/2 w-full">
+            <h1 className="font-bold">This week</h1>
+            <DayToUserAssignmentTable dayToUserMap={dayToUserThisWeek} />
+          </div>
+          <div className="flex-1/2 w-full">
+            <h1 className="font-bold">Next week</h1>
+            <DayToUserAssignmentTable dayToUserMap={dayToUserNextWeek} />
+          </div>
         </div>
-        <div className="flex-1/2 w-full">
-          <h1 className="font-bold">Next week</h1>
-          <DayToUserAssignmentTable dayToUserMap={dayToUserNextWeek} />
-        </div>
-      </div>
-      <p className="text-gray-200 bg-gray-600 py-2 px-4 rounded-md">
-        Assignments reset every Monday at 12 AM
-      </p>
+      </Card>
     </div>
   );
 };
