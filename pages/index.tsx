@@ -27,13 +27,13 @@ const DAYS_WITH_ORDER_METADATA = [...DAYS].map((day, i) => ({
 }));
 
 const SHUFFLED_DAYS_THIS_WEEK = [...DAYS_WITH_ORDER_METADATA]
-  .sort((a, b) => a.sortOrderFirstWeek - b.sortOrderSecondWeek)
+  .sort((a, b) => a.sortOrderFirstWeek - b.sortOrderFirstWeek)
   .map(({ day }) => day)
   // Only assign the first n shuffled days (we'll assign the rest as first come, first serve)
   .slice(0, USERS.length);
 
 const SHUFFLED_DAYS_NEXT_WEEK = [...DAYS_WITH_ORDER_METADATA]
-  .sort((a, b) => a.sortOrderSecondWeek - b.sortOrderFirstWeek)
+  .sort((a, b) => a.sortOrderSecondWeek - b.sortOrderSecondWeek)
   .map(({ day }) => day)
   .slice(0, USERS.length);
 
