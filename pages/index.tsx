@@ -1,11 +1,14 @@
 import type { NextPage } from 'next'
+import { DayToUserAssignment } from "../components/DayToUserAssignment";
+import { DayToUserAssignmentTable } from "../components/DayToUserAssignmentTable";
+import { getDateForNYC, snapToSunday } from "../util/calendar";
 import { generateWeeklySeed, randomWithSeed } from "../util/random";
 
 const USERS = ["Alp", "Erik", "Adam", "Grace", "Shelby"];
 
 type User = typeof USERS[number];
 
-const DAYS = [
+export const DAYS = [
   "Monday",
   "Tuesday",
   "Wednesday",
@@ -15,47 +18,47 @@ const DAYS = [
   "Sunday",
 ] as const;
 
-type Day = typeof DAYS[number];
+export type Day = typeof DAYS[number];
 
-const WEEKLY_SHUFFLED_DAYS = [...DAYS]
-  .map((day, i) => ({
-    day,
-    sortOrder: randomWithSeed(generateWeeklySeed() * i),
-  }))
-  .sort((a, b) => a.sortOrder - b.sortOrder)
-  .map(({ day }) => day);
+const DAYS_WITH_ORDER_METADATA = [...DAYS].map((day, i) => ({
+  day,
+  sortOrderFirstWeek: randomWithSeed(generateWeeklySeed() * (i + 1)),
+  sortOrderSecondWeek: randomWithSeed(generateWeeklySeed(1) * (i + 1)),
+}));
 
-// Only assign the first n shuffled days (we'll assign the rest as first come, first serve)
-const WEEKLY_SHUFFLED_DAYS_TO_ASSIGN = WEEKLY_SHUFFLED_DAYS.slice(
-  0,
-  USERS.length
-);
+const SHUFFLED_DAYS_THIS_WEEK = [...DAYS_WITH_ORDER_METADATA]
+  .sort((a, b) => a.sortOrderFirstWeek - b.sortOrderSecondWeek)
+  .map(({ day }) => day)
+  // Only assign the first n shuffled days (we'll assign the rest as first come, first serve)
+  .slice(0, USERS.length);
 
-const DAY_TO_USER_MAP = WEEKLY_SHUFFLED_DAYS_TO_ASSIGN.reduce(
-  (acc, day, index) => {
+const SHUFFLED_DAYS_NEXT_WEEK = [...DAYS_WITH_ORDER_METADATA]
+  .sort((a, b) => a.sortOrderSecondWeek - b.sortOrderFirstWeek)
+  .map(({ day }) => day)
+  .slice(0, USERS.length);
+
+const [DAY_TO_USER_THIS_WEEK, DAY_TO_USER_NEXT_WEEK] = [
+  SHUFFLED_DAYS_THIS_WEEK,
+  SHUFFLED_DAYS_NEXT_WEEK,
+].map((shuffledDays) =>
+  shuffledDays.reduce((acc, day, index) => {
     acc[day] = USERS[index];
     return acc;
-  },
-  {} as Partial<Record<Day, User>>
+  }, {} as Partial<Record<Day, User>>)
 );
 
 const Home: NextPage = () => {
   return (
     <div className="w-full h-full flex flex-col items-center justify-center gap-8">
-      <div className="w-min divide-y">
-        {DAYS.map((day) => (
-          <div
-            className="flex flex-row justify-between gap-12 py-2 px-2"
-            key={day}
-          >
-            <h1>{day}</h1>
-            <span className="whitespace-nowrap">
-              {DAY_TO_USER_MAP[day] ?? (
-                <i className="text-gray-500">First come, first serve</i>
-              )}
-            </span>
-          </div>
-        ))}
+      <div className="flex flex-wrap justify-center items-center gap-4 md:gap-12">
+        <div>
+          <h1 className="font-bold">This week</h1>
+          <DayToUserAssignmentTable dayToUserMap={DAY_TO_USER_THIS_WEEK} />
+        </div>
+        <div>
+          <h1 className="font-bold">Next week</h1>
+          <DayToUserAssignmentTable dayToUserMap={DAY_TO_USER_NEXT_WEEK} />
+        </div>
       </div>
       <p className="text-gray-200 bg-gray-600 py-2 px-4 rounded-md">
         Assignments reset every Monday at 12 AM
