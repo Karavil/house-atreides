@@ -25,15 +25,6 @@ const WEEKLY_SHUFFLED_DAYS = [...DAYS]
   .sort((a, b) => a.sortOrder - b.sortOrder)
   .map(({ day }) => day);
 
-const WEEKLY_SHUFFLED_DAYS_X = [...DAYS].map((day, i) => ({
-  day,
-  sortOrder: randomWithSeed(
-    // Increase the index by 1 so we don't multiply by 0 which
-    // would result in the same seed for Mondays.
-    generateWeeklySeed() * (i + 1)
-  ),
-}));
-
 // Only assign the first n shuffled days (we'll assign the rest as first come, first serve)
 const WEEKLY_SHUFFLED_DAYS_TO_ASSIGN = WEEKLY_SHUFFLED_DAYS.slice(
   0,
