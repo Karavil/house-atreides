@@ -59,8 +59,7 @@ const Home = ({
   return (
     <div
       className={cN(
-        "w-full min-h-[100vh]",
-        "bg-slate-100",
+        "max-w-2xl mx-auto min-h-[100vh]",
         "flex flex-col items-center justify-center gap-8",
         "p-4"
       )}
@@ -79,6 +78,15 @@ const Home = ({
             <DayToUserAssignmentTable dayToUserMap={dayToUserNextWeek} />
           </div>
         </div>
+      </Card>
+      <Card title="Pay rent">
+        <a
+          rel="noreferrer"
+          target="_blank"
+          href="https://venmo.com/code?user_id=2307190153019392968&created=1656457085.845623&printed=1"
+        >
+          Venmo
+        </a>
       </Card>
     </div>
   );
