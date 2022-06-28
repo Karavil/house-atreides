@@ -55,7 +55,7 @@ const Home = ({
   dayToUserNextWeek: Partial<Record<Day, User>>;
 }) => {
   return (
-    <div className="w-full h-full flex flex-col items-center justify-center gap-8 p-4">
+    <div className="w-full min-h-[100vh] flex flex-col items-center justify-center gap-8 py-4">
       <div className="max-w-2xl flex w-full flex-col sm:flex-row justify-center items-center gap-4 md:gap-12 px-8">
         <div className="flex-1/2 w-full">
           <h1 className="font-bold">This week</h1>
@@ -78,7 +78,7 @@ export async function getServerSideProps() {
     props: {
       dayToUserThisWeek: DAY_TO_USER_THIS_WEEK,
       dayToUserNextWeek: DAY_TO_USER_NEXT_WEEK,
-    }, // will be passed to the page component as props
+    },
   };
 }
 
