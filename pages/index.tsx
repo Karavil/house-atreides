@@ -47,17 +47,23 @@ const [DAY_TO_USER_THIS_WEEK, DAY_TO_USER_NEXT_WEEK] = [
   }, {} as Partial<Record<Day, User>>)
 );
 
-const Home: NextPage = () => {
+const Home = ({
+  dayToUserThisWeek,
+  dayToUserNextWeek,
+}: {
+  dayToUserThisWeek: Partial<Record<Day, User>>;
+  dayToUserNextWeek: Partial<Record<Day, User>>;
+}) => {
   return (
     <div className="w-full h-full flex flex-col items-center justify-center gap-8">
       <div className="flex flex-wrap justify-center items-center gap-4 md:gap-12">
         <div>
           <h1 className="font-bold">This week</h1>
-          <DayToUserAssignmentTable dayToUserMap={DAY_TO_USER_THIS_WEEK} />
+          <DayToUserAssignmentTable dayToUserMap={dayToUserThisWeek} />
         </div>
         <div>
           <h1 className="font-bold">Next week</h1>
-          <DayToUserAssignmentTable dayToUserMap={DAY_TO_USER_NEXT_WEEK} />
+          <DayToUserAssignmentTable dayToUserMap={dayToUserNextWeek} />
         </div>
       </div>
       <p className="text-gray-200 bg-gray-600 py-2 px-4 rounded-md">
@@ -66,5 +72,14 @@ const Home: NextPage = () => {
     </div>
   );
 };
+
+export async function getServerSideProps() {
+  return {
+    props: {
+      dayToUserThisWeek: DAY_TO_USER_THIS_WEEK,
+      dayToUserNextWeek: DAY_TO_USER_NEXT_WEEK,
+    }, // will be passed to the page component as props
+  };
+}
 
 export default Home
