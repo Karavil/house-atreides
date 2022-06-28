@@ -5,9 +5,5 @@ export const randomWithSeed = (seed: number) => {
   return x - Math.floor(x);
 };
 
-export const randomInInclusiveRange = (min: number, max: number) => {
-  return Math.floor(randomWithSeed(min) * (max - min + 1)) + min;
-};
-
 // Generate weekly seed (resets every Monday as the snap
 export const generateWeeklySeed = () => snapToSunday(getDateForNYC()).getTime();
