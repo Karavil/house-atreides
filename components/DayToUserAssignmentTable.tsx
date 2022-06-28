@@ -7,7 +7,7 @@ export const DayToUserAssignmentTable = ({
   dayToUserMap: Partial<Record<Day, string>>;
 }) => {
   return (
-    <div className="w-min divide-y">
+    <div className="w-full divide-y">
       {DAYS.map((day) => (
         <div className="flex flex-row justify-between gap-12 py-2" key={day}>
           <div className="flex flex-col">

@@ -55,13 +55,13 @@ const Home = ({
   dayToUserNextWeek: Partial<Record<Day, User>>;
 }) => {
   return (
-    <div className="w-full h-full flex flex-col items-center justify-center gap-8">
-      <div className="flex flex-wrap justify-center items-center gap-4 md:gap-12">
-        <div>
+    <div className="w-full h-full flex flex-col items-center justify-center gap-8 p-4">
+      <div className="max-w-2xl flex w-full flex-col sm:flex-row justify-center items-center gap-4 md:gap-12 px-8">
+        <div className="flex-1/2 w-full">
           <h1 className="font-bold">This week</h1>
           <DayToUserAssignmentTable dayToUserMap={dayToUserThisWeek} />
         </div>
-        <div>
+        <div className="flex-1/2 w-full">
           <h1 className="font-bold">Next week</h1>
           <DayToUserAssignmentTable dayToUserMap={dayToUserNextWeek} />
         </div>
