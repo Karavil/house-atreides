@@ -67,7 +67,7 @@ const Home: NextPage = () => {
         ))}
       </div>
       <p className="text-gray-200 bg-gray-600 py-2 px-4 rounded-md">
-        This list resets every Monday at 12 AM
+        Assignments reset every Monday at 12 AM
       </p>
     </div>
   );

@@ -5,5 +5,7 @@ export const randomWithSeed = (seed: number) => {
   return x - Math.floor(x);
 };
 
-// Generate weekly seed (resets every Monday at 12AM)
+// Generate weekly seed (resets every Monday at 12AM). Use the NYC timezone
+// to ensure that the seed is consistent across the server and clients in other
+// timezones.
 export const generateWeeklySeed = () => snapToSunday(getDateForNYC()).getTime();
