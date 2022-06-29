@@ -22,22 +22,27 @@ export const DAYS = [
 
 export type Day = typeof DAYS[number];
 
+const WEEKEND_DAYS: Set<Day> = new Set(["Saturday", "Sunday"] as const);
+const DAYS_TO_ASSIGN = new Set(DAYS.filter((day) => !WEEKEND_DAYS.has(day)));
+
 const DAYS_WITH_ORDER_METADATA = [...DAYS].map((day, i) => ({
   day,
   sortOrderFirstWeek: randomWithSeed(generateWeeklySeed() * (i + 1)),
   sortOrderSecondWeek: randomWithSeed(generateWeeklySeed(1) * (i + 1)),
 }));
 
-const SHUFFLED_DAYS_THIS_WEEK = [...DAYS_WITH_ORDER_METADATA]
-  .sort((a, b) => a.sortOrderFirstWeek - b.sortOrderFirstWeek)
-  .map(({ day }) => day)
-  // Only assign the first n shuffled days (we'll assign the rest as first come, first serve)
-  .slice(0, USERS.length);
+const [SHUFFLED_DAYS_THIS_WEEK, SHUFFLED_DAYS_NEXT_WEEK] = (
+  ["FirstWeek", "SecondWeek"] as const
+).map((week) =>
+  [...DAYS_WITH_ORDER_METADATA]
+    // Filter out days we don't want to assign to users
+    .filter(({ day }) => DAYS_TO_ASSIGN.has(day))
+    .sort((a, b) => a[`sortOrder${week}`] - b[`sortOrder${week}`])
+    .map(({ day }) => day)
+    // Only assign the first n shuffled days (we'll assign the rest as first come, first serve)
+    .slice(0, USERS.length)
+);
 
-const SHUFFLED_DAYS_NEXT_WEEK = [...DAYS_WITH_ORDER_METADATA]
-  .sort((a, b) => a.sortOrderSecondWeek - b.sortOrderSecondWeek)
-  .map(({ day }) => day)
-  .slice(0, USERS.length);
 
 const [DAY_TO_USER_THIS_WEEK, DAY_TO_USER_NEXT_WEEK] = [
   SHUFFLED_DAYS_THIS_WEEK,
