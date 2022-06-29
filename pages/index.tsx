@@ -74,7 +74,7 @@ const Home = ({
         </h1>
         <div
           className={cN(
-            "flex flex-col sm:flex-row flex-wrap items-start justify-center gap-4"
+            "flex flex-col sm:flex-row flex-wrap items-start justify-center gap-3"
           )}
         >
           <div className="flex-[2] w-full">
