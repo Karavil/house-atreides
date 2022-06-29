@@ -49,6 +49,8 @@ const [DAY_TO_USER_THIS_WEEK, DAY_TO_USER_NEXT_WEEK] = [
   }, {} as Partial<Record<Day, User>>)
 );
 
+const VENMO_COLOR_HEX = "#008CFF";
+
 const Home = ({
   dayToUserThisWeek,
   dayToUserNextWeek,
@@ -66,7 +68,7 @@ const Home = ({
     >
       <Card
         title="Laundry day assignments"
-        description="You get priority to do laundry on your assigned date! Assignments are updated every Monday at 12 AM."
+        description="You have priority to do laundry on your assigned date! Assignments are updated every Monday at 12 AM."
       >
         <div className="flex flex-col sm:flex-row justify-center items-center gap-4 md:gap-12">
           <div className="flex-1/2 w-full">
@@ -79,13 +81,39 @@ const Home = ({
           </div>
         </div>
       </Card>
-      <Card title="Pay rent">
+      <Card
+        title="Rent schedule"
+        description="Rent is due at the start of each month — don't be late!"
+      >
         <a
           rel="noreferrer"
           target="_blank"
           href="https://venmo.com/code?user_id=2307190153019392968&created=1656457085.845623&printed=1"
         >
-          Venmo
+          <div
+            className={cN(
+              "flex flex-row justify-center items-center",
+              "rounded-md overflow-hidden",
+              "text-white h-8",
+              "w-max"
+            )}
+          >
+            <img
+              alt="Venmo logo"
+              className={cN("h-full py-2.5 px-4", "bg-blue-200 ")}
+              src="/assets/venmo-logo.svg"
+            />
+            <span
+              className={cN(
+                "h-full flex justify-center items-center",
+                "bg-blue-900 text-blue-100",
+                "px-4",
+                "font-mono text-sm"
+              )}
+            >
+              @alpkv
+            </span>
+          </div>
         </a>
       </Card>
     </div>
