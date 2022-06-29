@@ -74,10 +74,10 @@ const Home = ({
         </h1>
         <div
           className={cN(
-            "flex flex-row flex-wrap items-start justify-center gap-4"
+            "flex flex-col sm:flex-row flex-wrap items-start justify-center gap-4"
           )}
         >
-          <div className="flex-[2]">
+          <div className="flex-[2] w-full">
             <Card
               title="Laundry day assignments"
               description="Weekends are first-come, first-serve. You have priority to do laundry on your assigned date; assignments are shuffled every Monday at 12 AM."
@@ -94,7 +94,7 @@ const Home = ({
               </div>
             </Card>
           </div>
-          <div className="flex-[1]">
+          <div className="flex-[1] w-full">
             <Card
               title="Rent schedule"
               description="Rent is due at the start of each month — don't be late!"
