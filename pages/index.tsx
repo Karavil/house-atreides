@@ -63,7 +63,7 @@ const Home = ({
 }) => {
   return (
     <div className="px-6 py-8 md:px-10 md:py-8 flex flex-col gap-6">
-      <h1 className="font-bold text-center sm:text-left text-3xl md:text-4xl text-white">
+      <h1 className="font-bold text-center sm:text-left text-[6vw] md:text-4xl text-white">
         Welcome to Caladan.
         <span className="mx-3">🌊 🦑</span>
       </h1>
