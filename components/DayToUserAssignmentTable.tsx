@@ -1,4 +1,4 @@
-import { Day, DAYS } from "../pages";
+import { DAYS, Day } from "../lib/const";
 import { DayToUserAssignment } from "./DayToUserAssignment";
 
 export const DayToUserAssignmentTable = ({

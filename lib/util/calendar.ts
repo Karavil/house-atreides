@@ -1,10 +1,7 @@
-const NYC_TIMEZONE = "America/New_York";
+import { utcToZonedTime } from "date-fns-tz";
 
-export const getDateForNYC = (): Date => {
-  const nycTime = new Date().toLocaleString("en-US", {
-    timeZone: NYC_TIMEZONE,
-  });
-  return new Date(nycTime);
+export const createNewYorkDate = (): Date => {
+  return utcToZonedTime(new Date(), "America/New_York");
 };
 
 const isSunday = (date: Date): boolean => {

@@ -1,4 +1,4 @@
-import { cN } from "../../util/style";
+import { cN } from "../../lib/util/style";
 
 const CARD_PADDING = "px-4 py-5 sm:px-6";
 
