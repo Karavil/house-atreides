@@ -61,11 +61,13 @@ const Home = ({ schedule }: { schedule: Schedule }) => {
                       "w-max"
                     )}
                   >
-                    <img
-                      alt="Venmo logo"
-                      className={cN("h-full py-2.5 px-4", "bg-blue-200 ")}
-                      src="/assets/venmo-logo.svg"
-                    />
+                    <div className="h-full py-2 px-4 bg-blue-200">
+                      <img
+                        alt="Venmo logo"
+                        className={cN("h-full")}
+                        src="/assets/venmo-logo.svg"
+                      />
+                    </div>
                     <span
                       className={cN(
                         "h-full flex justify-center items-center",
