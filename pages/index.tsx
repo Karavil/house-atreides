@@ -51,7 +51,7 @@ const Home = ({ schedule }: { schedule: Schedule }) => {
                 <a
                   rel="noreferrer"
                   target="_blank"
-                  href="https://venmo.com/code?user_id=2307190153019392968&created=1656457085.845623&printed=1"
+                  href="https://account.venmo.com/u/alpkv"
                 >
                   <div
                     className={cN(
