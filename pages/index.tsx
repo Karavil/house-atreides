@@ -57,11 +57,11 @@ const Home = ({ schedule }: { schedule: Schedule }) => {
                     className={cN(
                       "flex flex-row justify-center items-center",
                       "rounded-md overflow-hidden",
-                      "text-white h-8",
+                      "text-white h-6",
                       "w-max"
                     )}
                   >
-                    <div className="h-full py-2 px-4 bg-blue-200">
+                    <div className="h-full py-1.5 px-4 bg-blue-200">
                       <img
                         alt="Venmo logo"
                         className={cN("h-full")}
@@ -72,7 +72,7 @@ const Home = ({ schedule }: { schedule: Schedule }) => {
                       className={cN(
                         "h-full flex justify-center items-center",
                         "bg-blue-900 text-blue-100",
-                        "px-4",
+                        "px-4 py-2",
                         "font-mono text-sm"
                       )}
                     >
